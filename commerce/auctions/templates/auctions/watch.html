@@ -1,0 +1,23 @@
+{% extends 'auctions/layout.html' %}
+{% block body %}
+    <h2>added listings</h2>
+    <div class="card-container">
+        {% for item in items %}
+            <div class="card" style="display: inline-block; vertical-align: top; width: 20rem; height: 55rem; margin-right: 2rem; margin-bottom: 1rem;">
+                <img src="{{item.item.image_url}}" class="card-img-top" alt="image not found">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.item.title}}</h5>
+                    <p class="card-text" >{{item.item.description}}</p>
+                    <h5 class="card-text">{{item.item.minimum_bid}}</h5>
+                    <h5>quantity:{{item.count}}</h5>
+                    <a href="{% url 'view' pk=item.item.pk %}" class="btn btn-primary">view_details</a>
+                    <br><br>
+                    <form action="{% url 'delete_item' pk=item.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">remove_item</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

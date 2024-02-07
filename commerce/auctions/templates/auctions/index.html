@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div class="card-container">
+        {% for item in items %}
+            <div class="card" style="display: inline-block; vertical-align: top; width: 20rem; height: 60rem; margin-right: 2rem; margin-bottom: 1rem;">
+                <img src="{{item.image_url}}" class="card-img-top" alt="image not found">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.title}}</h5>
+                    <p class="card-text" >{{item.description}}</p>
+                    <h5 class="card-text">{{item.minimum_bid}}</h5>
+                    <a href="{% url 'view' pk=item.pk %}" class="btn btn-primary">view_details</a>
+                    <br><br>
+                    <form action="{% url 'add_item' pk=item.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">add_item_to_watchlist</button>
+                    </form>
+                    <br>
+                    <form action="{% url 'delete' pk=item.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">only can be deleted by lister</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

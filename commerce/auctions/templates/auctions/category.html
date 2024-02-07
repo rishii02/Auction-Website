@@ -1,0 +1,14 @@
+{% extends 'auctions/layout.html' %}
+{% block body %}
+    <form action="{% url 'category' %}" method="post">
+        {% csrf_token %}
+        <select name="dropdown">
+            <option disabled selected>Choose an category</option>
+            <option value="headphone">headphone</option>
+            <option value="laptop">laptop</option>
+            <option value="phone">phone</option>
+            <option value="powerBank">powerBank</option>
+        </select>
+        <button type="submit" class="btn btn-primary">submit</button>
+    </form>
+{% endblock %}

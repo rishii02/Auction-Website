@@ -1,0 +1,69 @@
+{% extends "auctions/layout.html" %}
+{% block head %}
+<title>Product Details</title>
+<style>
+  /* CSS styles for better appearance */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input[type="text"],
+  select {
+    width: 30%;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  textarea {
+    width: 40%;
+    height: 100px;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+{% endblock %}
+{% block body %}
+<form id="productForm" action="{% url 'create' %}" method="post">
+    {% csrf_token %}
+    <label for="name">title:</label>
+    <input type="text" id="name" name="title"required>
+    
+    <label for="category">Category:</label>
+    <select id="category" name="category" required>
+      <option value="">Select Category</option>
+      <option value="laptop">Laptop</option>
+      <option value="mobileCharger">Mobile Charger</option>
+      <option value="powerBank">Power Bank</option>
+      <option value="phone">Phone</option>
+      <option value="headphone">Headphone</option>
+      <option value="watches">Watches</option>
+    </select>
+    
+    <label for="mrp">starting_bid:</label>
+    <input type="text" id="mrp" name="bid" required>
+    
+    <label for="description">Description:</label>
+    <textarea id="description" name="des" required></textarea>
+    
+    <label for="image">provide Image_url:</label>
+    <input type="text" id="image" name="image_url" required>
+    
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
